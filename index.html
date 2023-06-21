@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>User Records</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f3f3f3;
+        margin: 0;
+        padding: 20px;
+      }
+
+      h1 {
+        color: #333;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+        overflow: hidden;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        padding: 12px 16px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+
+      th {
+        background-color: #f5f5f5;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #666;
+      }
+
+      tr:hover {
+        background-color: #f9f9f9;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>User Records</h1>
+      <table id="userTable">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Website</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <script>
+      // Fetch data from the provided URL
+      fetch('https://dummyjson.com/users')
+        .then((response) => response.json())
+        .then((data) => {
+          const users = data.users;
+
+          // Create table rows dynamically
+          const tableBody = document.querySelector('#userTable tbody');
+          users.forEach((user) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td>${user.name}</td>
+              <td>${user.email}</td>
+              <td>${user.phone}</td>
+              <td>${user.website}</td>
+            `;
+            tableBody.appendChild(row);
+          });
+        })
+        .catch((error) => {
+          console.log('Error:', error);
+        });
+    </script>
+  </body>
+</html>
